@@ -8,11 +8,11 @@ public class AnimationEventManager : MonoBehaviour
 
     public void EnableWeapon()
     {
-        Weapon.EnableWeapon();
+        //Weapon.EnableWeapon();
     }
 
     public void DisableWeapon()
     {
-        Weapon.DisableWeapon();
+        //Weapon.DisableWeapon();
     }
 }
