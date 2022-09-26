@@ -16,7 +16,6 @@ public class EnemyAttackingState : EnemyBaseState
         int attackIndex = Random.Range(0, 2);
         var attack = stateMachine.Weapon.Attacks[attackIndex];
         FacePlayer();
-        //stateMachine.WeaponDamage.SetAttack(stateMachine.AttackDamage, stateMachine.WeaponKnockback);
         stateMachine.Weapon.SetAttack(attack.Damage, attack.Knockback);
         stateMachine.Animator.CrossFadeInFixedTime(attack.AnimationName, TransitionDuration);
     }

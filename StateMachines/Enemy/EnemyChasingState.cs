@@ -36,10 +36,9 @@ public class EnemyChasingState : EnemyBaseState
         }
         else if (InAttackRange() && timeBetweenActions > 0f)
         {
-            stateMachine.SwitchState(new EnemyEquippedState(stateMachine, timeBetweenActions));
+            stateMachine.SwitchState(new EnemyEquipState(stateMachine, timeBetweenActions));
             return;
         }
-        //Debug.Log(timeBetweenActions);
         MoveToPlayer(deltaTime);
         FacePlayer();
         stateMachine.Animator.SetFloat(SpeedHash, 1f, AnimatorDampTime, deltaTime);

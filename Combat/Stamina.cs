@@ -19,7 +19,6 @@ public class Stamina : MonoBehaviour
             stamina += (Time.deltaTime * 2.5f);
         }
 
-        //Debug.Log($"{gameObject.name}: {stamina}");
     }
 
     public float GetStamina()

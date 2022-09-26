@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class EnemyEquippedState : EnemyBaseState
+public class EnemyEquipState : EnemyBaseState
 {
     private readonly int EquippedHash = Animator.StringToHash("Armed-Idle");
     private const float CrossFadeDuration = 0.1f;
     private float timeBetweenActions = 0f;
 
-    public EnemyEquippedState(EnemyStateMachine stateMachine, float timeBetweenActions) : base(stateMachine)
+    public EnemyEquipState(EnemyStateMachine stateMachine, float timeBetweenActions) : base(stateMachine)
     {
         this.timeBetweenActions = timeBetweenActions;
     }

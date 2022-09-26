@@ -30,7 +30,6 @@ public class PlayerFreeLookState : PlayerBaseState
 
     public override void Tick(float deltaTime)
     {
-        //var attackStamina = stateMachine.Attacks[0].StaminaUsage;
         var attackStamina = stateMachine.WeaponHandler.Weapon.Attacks[0].StaminaUsage;
 
         if (stateMachine.InputReader.IsAttacking && stateMachine.Stamina.GetStamina() >= attackStamina)
@@ -41,7 +40,6 @@ public class PlayerFreeLookState : PlayerBaseState
 
         Vector3 movement = CalculateMovement();
 
-        //stateMachine.CharacterController.Move(movement * stateMachine.FreeLookMovementSpeed * deltaTime);
         Move(movement * stateMachine.FreeLookMovementSpeed, deltaTime);
 
         if (stateMachine.InputReader.MovementValue == Vector2.zero)
@@ -75,7 +73,6 @@ public class PlayerFreeLookState : PlayerBaseState
 
     private void FaceMovementDirection(Vector3 movement, float deltaTime)
     {
-        //stateMachine.transform.rotation = Quaternion.LookRotation(movement);
         stateMachine.transform.rotation = Quaternion.Lerp(stateMachine.transform.rotation, Quaternion.LookRotation(movement), stateMachine.RotationDamping * deltaTime);
     }
 

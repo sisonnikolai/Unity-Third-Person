@@ -10,15 +10,11 @@ public class EnemyStateMachine : StateMachine
     [field: SerializeField] public ForceReceiver ForceReceiver { get; private set; }
     [field: SerializeField] public Health Health { get; private set; }
     [field: SerializeField] public Weapon Weapon { get; private set; }
-    //[field: SerializeField] public Stamina Stamina { get; private set; }
     [field: SerializeField] public Target Target { get; private set; }
     [field: SerializeField] public NavMeshAgent Agent { get; private set; }
     [field: SerializeField] public Ragdoll Ragdoll { get; private set; }
     [field: SerializeField] public float DetectionRange { get; private set; }
-    //[field: SerializeField] public int AttackDamage { get; private set; } // TODO: move to a Weapon class
     [field: SerializeField] public float AttackRange { get; private set; }
-    //[field: SerializeField] public float WeaponKnockback { get; private set; }
-    //[field: SerializeField] public WeaponDamage WeaponDamage { get; private set; } // TODO: change to a Weapon class
     [field: SerializeField] public float MovementSpeed { get; private set; }
     public Health Player { get; private set; }
 

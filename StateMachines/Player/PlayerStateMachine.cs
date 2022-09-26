@@ -13,7 +13,6 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public Health Health { get; private set; }
     [field: SerializeField] public Stamina Stamina { get; private set; }
     [field: SerializeField] public WeaponHandler WeaponHandler { get; private set; }
-    //[field: SerializeField] public WeaponDamage WeaponDamage { get; private set; } // TODO: change to a Weapon class
     [field: SerializeField] public Ragdoll Ragdoll { get; private set; }
     [field: SerializeField] public LedgeDetector LedgeDetector { get; private set; }
     [field: SerializeField] public float FreeLookMovementSpeed { get; private set; }
@@ -21,9 +20,7 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public float RotationDamping { get; private set; }
     [field: SerializeField] public float DodgeDuration { get; private set; }
     [field: SerializeField] public float DodgeDistance { get; private set; }
-    //[field: SerializeField] public float DodgeCooldown { get; private set; }
     [field: SerializeField] public float JumpForce { get; private set; }
-    //[field: SerializeField] public Attack[] Attacks { get; private set; } // TODO: move to Weapon class
 
     public Transform MainCameraTransform { get; private set; }
     public float PreviousDodgeTime { get; private set; } = Mathf.NegativeInfinity;
@@ -48,11 +45,6 @@ public class PlayerStateMachine : StateMachine
         Health.OnTakeDamage -= HandleTakeDamage;
         Health.OnDie -= HandleDie;
     }
-
-    //public void SetDodgetime(float dodgeTime)
-    //{
-    //    PreviousDodgeTime = dodgeTime;
-    //}
 
     private void HandleTakeDamage()
     {
