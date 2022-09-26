@@ -17,7 +17,6 @@ public class PlayerAttackingState : PlayerBaseState
 
     public override void Enter()
     {
-        //if (stateMachine.Stamina.GetStamina() < attackAnimation.StaminaUsage) { return; }
         //stateMachine.WeaponDamage.SetAttack(attackAnimation.Damage, attackAnimation.Knockback);
         stateMachine.WeaponHandler.Weapon.SetAttack(attackAnimation.Damage, attackAnimation.Knockback);
         stateMachine.Animator.CrossFadeInFixedTime(attackAnimation.AnimationName, attackAnimation.TransitionDuration);

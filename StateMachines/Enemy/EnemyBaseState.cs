@@ -42,7 +42,6 @@ public abstract class EnemyBaseState : State
         {
             var lookAt = (stateMachine.Player.transform.position - stateMachine.transform.position);
             lookAt.y = 0f;
-            //stateMachine.transform.rotation = Quaternion.Lerp(stateMachine.transform.rotation, Quaternion.LookRotation(lookAt), stateMachine.RotationDamping * Time.deltaTime);
             stateMachine.transform.rotation = Quaternion.LookRotation(lookAt);
         }
     }

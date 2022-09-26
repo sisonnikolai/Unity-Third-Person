@@ -40,24 +40,4 @@ public class Weapon : MonoBehaviour
         attackKnockback = knockback;
     }
 
-    // methods are being called in the animation (animation events)
-    #region TO BE REMOVED (UNUSED)
-    public void EnableWeapon()
-    {
-        if (weaponPrefab.TryGetComponent(out CapsuleCollider collider))
-        {
-            collider.enabled = true;
-            AlreadyCollidedWith.Clear();
-        }
-    }
-
-    public void DisableWeapon()
-    {
-
-        if (weaponPrefab.TryGetComponent(out CapsuleCollider collider))
-        {
-            collider.enabled = false;
-        }
-    }
-    #endregion
 }

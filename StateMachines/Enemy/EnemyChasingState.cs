@@ -39,7 +39,6 @@ public class EnemyChasingState : EnemyBaseState
             stateMachine.SwitchState(new EnemyEquippedState(stateMachine, timeBetweenActions));
             return;
         }
-        //Debug.Log(timeBetweenActions);
         MoveToPlayer(deltaTime);
         FacePlayer();
         stateMachine.Animator.SetFloat(SpeedHash, 1f, AnimatorDampTime, deltaTime);

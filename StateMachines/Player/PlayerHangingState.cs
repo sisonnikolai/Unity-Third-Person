@@ -28,7 +28,6 @@ public class PlayerHangingState : PlayerBaseState
     {
         if (stateMachine.InputReader.MovementValue.y < 0f)
         {
-            //stateMachine.CharacterController.Move(Vector3.zero);
             stateMachine.ForceReceiver.Reset();
             stateMachine.SwitchState(new PlayerFallingState(stateMachine));
         } else if (stateMachine.InputReader.MovementValue.y > 0f)

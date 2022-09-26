@@ -28,7 +28,6 @@ public class Targeter : MonoBehaviour
     {
         if (other.TryGetComponent<Target>(out Target target))
         {
-            //targets.Remove(target);
             RemoveTarget(target);
         }
     }
@@ -44,10 +43,6 @@ public class Targeter : MonoBehaviour
         foreach (Target target in targets)
         {
             Vector2 viewPos = mainCamera.WorldToViewportPoint(target.transform.position);
-            //if (viewPos.x < 0 || viewPos.x > 1 || viewPos.y < 0 || viewPos.y > 1)
-            //{
-            //    continue;
-            //}
             if (!target.GetComponentInChildren<Renderer>().isVisible)
             {
                 continue;
@@ -63,7 +58,6 @@ public class Targeter : MonoBehaviour
 
         if (closestTarget == null) { return false; }
 
-        //CurrentTarget = targets[0];
         CurrentTarget = closestTarget;
         CinemachineTargetGroup.AddMember(CurrentTarget.transform, 1f, 2f);
         return true;

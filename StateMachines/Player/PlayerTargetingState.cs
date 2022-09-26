@@ -16,7 +16,6 @@ public class PlayerTargetingState : PlayerBaseState
 
     public override void Enter()
     {
-        //stateMachine.InputReader.CancelEvent += OnCancel;
         stateMachine.InputReader.TargetEvent += OnTarget;
         stateMachine.InputReader.DodgeEvent += OnDodge;
         stateMachine.InputReader.JumpEvent += OnJump;
@@ -51,7 +50,6 @@ public class PlayerTargetingState : PlayerBaseState
 
     public override void Exit()
     {
-        //stateMachine.InputReader.CancelEvent -= OnCancel;
         stateMachine.InputReader.TargetEvent -= OnTarget;
         stateMachine.InputReader.DodgeEvent -= OnDodge;
         stateMachine.InputReader.JumpEvent -= OnJump;
@@ -65,11 +63,6 @@ public class PlayerTargetingState : PlayerBaseState
 
     private void OnDodge()
     {
-        //if (Time.time - stateMachine.PreviousDodgeTime < stateMachine.DodgeCooldown) { return; }
-        //stateMachine.SetDodgetime(Time.time);
-        //dodgeInput = stateMachine.InputReader.MovementValue;
-        //remainingDodgeDuration = stateMachine.DodgeDuration;
-
         if (stateMachine.InputReader.MovementValue == Vector2.zero) { return; }
         stateMachine.SwitchState(new PlayerDodgingState(stateMachine, stateMachine.InputReader.MovementValue));
     }
@@ -82,18 +75,8 @@ public class PlayerTargetingState : PlayerBaseState
     {
         Vector3 movement = new Vector3();
 
-        //if (remainingDodgeDuration > 0f)
-        //{
-        //    movement += stateMachine.transform.right * dodgeInput.x * stateMachine.DodgeDistance / stateMachine.DodgeDuration;
-        //    movement += stateMachine.transform.forward * dodgeInput.y * stateMachine.DodgeDistance / stateMachine.DodgeDuration;
-
-        //    remainingDodgeDuration = Mathf.Max(remainingDodgeDuration - deltaTime, 0f);
-        //}
-        //else
-        //{
-            movement += stateMachine.transform.right * stateMachine.InputReader.MovementValue.x;
-            movement += stateMachine.transform.forward * stateMachine.InputReader.MovementValue.y;
-        //}
+        movement += stateMachine.transform.right * stateMachine.InputReader.MovementValue.x;
+        movement += stateMachine.transform.forward * stateMachine.InputReader.MovementValue.y;
 
         return movement;
     }

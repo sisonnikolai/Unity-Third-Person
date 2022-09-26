@@ -28,7 +28,6 @@ public abstract class PlayerBaseState : State
         {
             var lookAt = (stateMachine.Targeter.CurrentTarget.transform.position - stateMachine.transform.position);
             lookAt.y = 0f;
-            //stateMachine.transform.rotation = Quaternion.Lerp(stateMachine.transform.rotation, Quaternion.LookRotation(lookAt), stateMachine.RotationDamping * Time.deltaTime);
             stateMachine.transform.rotation = Quaternion.LookRotation(lookAt);
         }
     }
