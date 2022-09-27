@@ -11,6 +11,21 @@ public abstract class PlayerBaseState : State
         this.stateMachine = stateMachine;
     }
 
+    // moved from PlayerFreeLookState
+    protected Vector3 CalculateMovement()
+    {
+        Vector3 camForward = stateMachine.MainCameraTransform.forward;
+        Vector3 camRight = stateMachine.MainCameraTransform.right;
+
+        camForward.y = 0f;
+        camRight.y = 0f;
+
+        camForward.Normalize();
+        camRight.Normalize();
+
+        return camForward * stateMachine.InputReader.MovementValue.y + camRight * stateMachine.InputReader.MovementValue.x;
+    }
+
     protected void Move(float deltaTime)
     {
         Move(Vector3.zero, deltaTime);

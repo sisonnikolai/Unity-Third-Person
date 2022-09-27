@@ -4,9 +4,10 @@ public class PlayerFreeLookState : PlayerBaseState
 {
     private readonly int FreeLookSpeedHash = Animator.StringToHash("FreeLookSpeed");
     private readonly int FreeLookBlendTreeHash = Animator.StringToHash("FreeLookBlendTree");
+    private readonly int EquipHash = Animator.StringToHash("EquipFromBack");
     private const float AnimatorDampTime = 0.1f;
     private const float CrossFadeDuration = 0.1f;
-    private bool shouldFade;
+    private bool shouldFade; // for the climbing animation
     public PlayerFreeLookState(PlayerStateMachine stateMachine, bool shouldFade = true) : base(stateMachine) 
     {
         this.shouldFade = shouldFade;
@@ -16,6 +17,7 @@ public class PlayerFreeLookState : PlayerBaseState
     {
         stateMachine.InputReader.TargetEvent += OnTarget;
         stateMachine.InputReader.JumpEvent += OnJump;
+        stateMachine.InputReader.EquipEvent += OnEquip;
 
         stateMachine.Animator.SetFloat(FreeLookSpeedHash, 0f);
         if (shouldFade)
@@ -55,20 +57,7 @@ public class PlayerFreeLookState : PlayerBaseState
     {
         stateMachine.InputReader.TargetEvent -= OnTarget;
         stateMachine.InputReader.JumpEvent -= OnJump;
-    }
-
-    private Vector3 CalculateMovement()
-    {
-        Vector3 camForward = stateMachine.MainCameraTransform.forward;
-        Vector3 camRight = stateMachine.MainCameraTransform.right;
-
-        camForward.y = 0f;
-        camRight.y = 0f;
-
-        camForward.Normalize();
-        camRight.Normalize();
-
-        return camForward * stateMachine.InputReader.MovementValue.y + camRight * stateMachine.InputReader.MovementValue.x;
+        stateMachine.InputReader.EquipEvent -= OnEquip;
     }
 
     private void FaceMovementDirection(Vector3 movement, float deltaTime)
@@ -85,5 +74,11 @@ public class PlayerFreeLookState : PlayerBaseState
     private void OnJump()
     {
         stateMachine.SwitchState(new PlayerJumpingState(stateMachine));
+    }
+    private void OnEquip()
+    {
+        //stateMachine.SwitchState(new PlayerEquipState(stateMachine));
+        stateMachine.WeaponHandler.SetWeaponEquip(true);
+        stateMachine.Animator.CrossFadeInFixedTime(EquipHash, CrossFadeDuration);
     }
 }

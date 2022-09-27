@@ -60,7 +60,20 @@ public class PlayerStateMachine : StateMachine
     {
         SwitchState(new PlayerHangingState(this, ledgeForward, closestPoint));
     }
+
+    #region Animation Events
+    private void HandleEquip()
+    {
+        SwitchState(new PlayerEquipState(this));
+    }
+
+    private void HandleUnequip()
+    {
+        SwitchState(new PlayerFreeLookState(this));
+    }
+
     private void FootL() { }
     private void FootR() { }
     private void Hit() { }
+    #endregion
 }

@@ -11,8 +11,16 @@ public class WeaponHandler : MonoBehaviour
     [SerializeField] private Transform rightHandTransform;
     [SerializeField] private Transform weaponAttachment; // weapon placement in the back
 
+    private bool weaponEquipped = false;
+    private GameObject weaponAttached;
+
+    private void Start()
+    {
+        weaponAttached = Instantiate(weaponPrefab, weaponAttachment);
+    }
+
     // methods are being called in the animation (animation events)
-    public void EnableWeapon()
+    private void EnableWeapon()
     {
         if (weaponPrefab.TryGetComponent(out CapsuleCollider collider))
         {
@@ -21,7 +29,7 @@ public class WeaponHandler : MonoBehaviour
         }
     }
 
-    public void DisableWeapon()
+    private void DisableWeapon()
     {
 
         if (weaponPrefab.TryGetComponent(out CapsuleCollider collider))
@@ -30,18 +38,23 @@ public class WeaponHandler : MonoBehaviour
         }
     }
 
-    public void WeaponSwitch()
+    private void WeaponSwitch()
     {
-        //if (weaponEquipped)
-        //{
-        //    weaponAttached.transform.SetParent(rightHandTransform);
-        //}
-        //else
-        //{
-        //    weaponAttached.transform.SetParent(weaponAttachment);
-        //}
+        if (weaponEquipped)
+        {
+            weaponAttached.transform.SetParent(rightHandTransform);
+        }
+        else
+        {
+            weaponAttached.transform.SetParent(weaponAttachment);
+        }
 
-        //weaponAttached.transform.localPosition = Vector3.zero;
-        //weaponAttached.transform.localRotation = Quaternion.identity;
+        weaponAttached.transform.localPosition = Vector3.zero;
+        weaponAttached.transform.localRotation = Quaternion.identity;
+    }
+
+    public void SetWeaponEquip(bool isEquipped)
+    {
+        weaponEquipped = isEquipped;
     }
 }
