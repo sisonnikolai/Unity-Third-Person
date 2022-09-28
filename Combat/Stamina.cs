@@ -21,12 +21,12 @@ public class Stamina : MonoBehaviour
 
     }
 
-    public float GetStamina()
+    public float GetValue()
     {
         return stamina;
     }
 
-    public void ReduceStamina(float usage)
+    public void Reduce(float usage)
     {
         stamina -= usage;
     }

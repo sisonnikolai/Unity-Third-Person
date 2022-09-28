@@ -20,7 +20,7 @@ public class PlayerAttackingState : PlayerBaseState
         //stateMachine.WeaponDamage.SetAttack(attackAnimation.Damage, attackAnimation.Knockback);
         stateMachine.WeaponHandler.Weapon.SetAttack(attackAnimation.Damage, attackAnimation.Knockback);
         stateMachine.Animator.CrossFadeInFixedTime(attackAnimation.AnimationName, attackAnimation.TransitionDuration);
-        stateMachine.Stamina.ReduceStamina(attackAnimation.StaminaUsage);
+        stateMachine.Stamina.Reduce(attackAnimation.StaminaUsage);
     }
 
     public override void Tick(float deltaTime)
@@ -66,7 +66,7 @@ public class PlayerAttackingState : PlayerBaseState
     {
         if (attackAnimation.ComboStateIndex == -1) { return; }
         if (normalizedTime < attackAnimation.ComboAttackTime) { return; }
-        if (stateMachine.Stamina.GetStamina() < attackAnimation.StaminaUsage) { return; }
+        if (stateMachine.Stamina.GetValue() < attackAnimation.StaminaUsage) { return; }
 
         stateMachine.SwitchState(new PlayerAttackingState(stateMachine, attackAnimation.ComboStateIndex));
     }
