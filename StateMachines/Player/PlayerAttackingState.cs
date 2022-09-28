@@ -50,7 +50,8 @@ public class PlayerAttackingState : PlayerBaseState
             }
             else
             {
-                stateMachine.SwitchState(new PlayerFreeLookState(stateMachine));
+                //stateMachine.SwitchState(new PlayerFreeLookState(stateMachine));
+                stateMachine.SwitchState(new PlayerEquipState(stateMachine));
             }
         }
 

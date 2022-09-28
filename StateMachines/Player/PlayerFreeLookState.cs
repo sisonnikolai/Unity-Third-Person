@@ -32,13 +32,13 @@ public class PlayerFreeLookState : PlayerBaseState
 
     public override void Tick(float deltaTime)
     {
-        var attackStamina = stateMachine.WeaponHandler.Weapon.Attacks[0].StaminaUsage;
+        //var attackStamina = stateMachine.WeaponHandler.Weapon.Attacks[0].StaminaUsage;
 
-        if (stateMachine.InputReader.IsAttacking && stateMachine.Stamina.GetValue() >= attackStamina)
-        {
-            stateMachine.SwitchState(new PlayerAttackingState(stateMachine, 0));
-            return;
-        }
+        //if (stateMachine.InputReader.IsAttacking && stateMachine.Stamina.GetValue() >= attackStamina)
+        //{
+        //    stateMachine.SwitchState(new PlayerAttackingState(stateMachine, 0));
+        //    return;
+        //}
 
         Vector3 movement = CalculateMovement();
 
