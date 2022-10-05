@@ -12,13 +12,13 @@ public class PlayerAttackingState : PlayerBaseState
     public PlayerAttackingState(PlayerStateMachine stateMachine, int attackIndex) : base(stateMachine) 
     {
         //attackAnimation = stateMachine.Attacks[attackIndex];
-        attackAnimation = stateMachine.WeaponHandler.Weapon.Attacks[attackIndex];
+        attackAnimation = stateMachine.WeaponHandler.weapon.Attacks[attackIndex];
     }
 
     public override void Enter()
     {
         //stateMachine.WeaponDamage.SetAttack(attackAnimation.Damage, attackAnimation.Knockback);
-        stateMachine.WeaponHandler.Weapon.SetAttack(attackAnimation.Damage, attackAnimation.Knockback);
+        stateMachine.WeaponHandler.weapon.SetAttack(attackAnimation.Damage, attackAnimation.Knockback);
         stateMachine.Animator.CrossFadeInFixedTime(attackAnimation.AnimationName, attackAnimation.TransitionDuration);
         stateMachine.Stamina.Reduce(attackAnimation.StaminaUsage);
     }

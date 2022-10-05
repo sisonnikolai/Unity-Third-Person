@@ -13,7 +13,7 @@ public class PlayerDeadState : PlayerBaseState
         //stateMachine.Ragdoll.ToggleRagdoll(true);
         stateMachine.Animator.CrossFadeInFixedTime("Armed-Death", 0.1f);  // TODO: set different death animations (sword, bow, staff)
         //stateMachine.WeaponDamage.gameObject.SetActive(false);
-        stateMachine.WeaponHandler.Weapon.gameObject.SetActive(false);
+        stateMachine.WeaponHandler.weapon.gameObject.SetActive(false);
     }
 
     public override void Tick(float deltaTime)

@@ -6,11 +6,11 @@ public class Weapon : MonoBehaviour
 {
     [field: SerializeField] public Attack[] Attacks { get; private set; } // TODO: move to Weapon class
     [SerializeField] private GameObject weaponPrefab = null;
-    [SerializeField] private Collider myCollider = null;
+    [SerializeField] private Collider myCollider; //TODO: remove. Already in WeaponHandler
 
     private int attackDamage = 0;
     private float attackKnockback = 1f;
-    public List<Collider> AlreadyCollidedWith { get; private set; } = new List<Collider>();
+    [field: SerializeField] public List<Collider> AlreadyCollidedWith { get; private set; } = new List<Collider>();
 
     private void OnTriggerEnter(Collider other)
     {
@@ -40,4 +40,8 @@ public class Weapon : MonoBehaviour
         attackKnockback = knockback;
     }
 
+    public void SetCollider(Collider characterCollider)
+    {
+        myCollider = characterCollider;
+    }
 }

@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class WeaponPickup : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private GameObject weaponPrefab = null;
+    [SerializeField] private Weapon weapon = null;
+    [SerializeField] private WeaponPlacement weaponPlacement;
+
+    enum WeaponPlacement
     {
-        
+        Back,
+        Side
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if (other.CompareTag("Player"))
+        {
+            other.GetComponent<WeaponHandler>().AttachWeapon(weaponPrefab, weaponPlacement.ToString());
+            Destroy(this.gameObject);
+        }
     }
 }

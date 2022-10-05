@@ -25,7 +25,7 @@ public class PlayerTargetingState : PlayerBaseState
     public override void Tick(float deltaTime)
     {
         //var attackStamina = stateMachine.Attacks[0].StaminaUsage;
-        var attackStamina = stateMachine.WeaponHandler.Weapon.Attacks[0].StaminaUsage;
+        var attackStamina = stateMachine.WeaponHandler.weapon.Attacks[0].StaminaUsage;
 
         if (stateMachine.InputReader.IsAttacking && stateMachine.Stamina.GetValue() >= attackStamina)
         {
