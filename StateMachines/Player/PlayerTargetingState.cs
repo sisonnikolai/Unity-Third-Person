@@ -58,7 +58,14 @@ public class PlayerTargetingState : PlayerBaseState
     private void OnTarget()
     {
         stateMachine.Targeter.CancelTarget();
-        stateMachine.SwitchState(new PlayerFreeLookState(stateMachine));
+        if (stateMachine.WeaponHandler.WeaponAttached())
+        {
+            stateMachine.SwitchState(new PlayerEquipState(stateMachine));
+        }
+        else
+        {
+            stateMachine.SwitchState(new PlayerFreeLookState(stateMachine));
+        }
     }
 
     private void OnDodge()

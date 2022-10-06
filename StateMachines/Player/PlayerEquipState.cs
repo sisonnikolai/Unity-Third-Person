@@ -17,6 +17,7 @@ public class PlayerEquipState : PlayerBaseState
 
     public override void Enter()
     {
+        stateMachine.InputReader.TargetEvent += OnTarget;
         stateMachine.InputReader.EquipEvent += OnEquip;
         stateMachine.Animator.CrossFadeInFixedTime(EquipBlendTreeHash, CrossFadeDuration);
     }
@@ -47,7 +48,15 @@ public class PlayerEquipState : PlayerBaseState
 
     public override void Exit()
     {
+        stateMachine.InputReader.TargetEvent -= OnTarget;
         stateMachine.InputReader.EquipEvent -= OnEquip;
+    }
+
+    private void OnTarget()
+    {
+        // added EquipBlendTree state in the StateDrivenCamera object in the inspector to prevent camera issues
+        if (!stateMachine.Targeter.SetTarget()) { return; }
+        stateMachine.SwitchState(new PlayerTargetingState(stateMachine));
     }
 
     private void OnEquip()
