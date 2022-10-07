@@ -58,7 +58,7 @@ public class PlayerTargetingState : PlayerBaseState
     private void OnTarget()
     {
         stateMachine.Targeter.CancelTarget();
-        if (stateMachine.WeaponHandler.WeaponAttached())
+        if (stateMachine.WeaponHandler.HasWeapon() && stateMachine.WeaponHandler.IsWeaponEquipped())
         {
             stateMachine.SwitchState(new PlayerEquipState(stateMachine));
         }

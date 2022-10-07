@@ -78,7 +78,7 @@ public class PlayerFreeLookState : PlayerBaseState
     private void OnEquip()
     {
         //stateMachine.SwitchState(new PlayerEquipState(stateMachine));
-        if (!stateMachine.WeaponHandler.WeaponAttached()) { return; }
+        if (!stateMachine.WeaponHandler.HasWeapon()) { return; }
         stateMachine.WeaponHandler.SetWeaponEquip(true);
         stateMachine.Animator.CrossFadeInFixedTime(EquipHash, CrossFadeDuration);
     }

@@ -71,7 +71,7 @@ public class WeaponHandler : MonoBehaviour
     {
         // TODO: destroy old weapon
         this.weaponPrefab = weaponPrefab;
-        weaponEquipped = true;
+        //weaponEquipped = true;
 
         if (weaponPlacement == "Back")
         {
@@ -87,8 +87,13 @@ public class WeaponHandler : MonoBehaviour
         this.weapon.SetCollider(myCollider);
     }
 
-    public bool WeaponAttached()
+    public bool HasWeapon()
     {
         return weaponPrefab != null;
+    }
+
+    public bool IsWeaponEquipped()
+    {
+        return weaponEquipped;
     }
 }

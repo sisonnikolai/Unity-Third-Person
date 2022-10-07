@@ -53,7 +53,7 @@ public abstract class PlayerBaseState : State
         {
             stateMachine.SwitchState(new PlayerTargetingState(stateMachine));
         }
-        else if (stateMachine.WeaponHandler.WeaponAttached())
+        else if (stateMachine.WeaponHandler.HasWeapon())
         {
             stateMachine.SwitchState(new PlayerEquipState(stateMachine));
         }
