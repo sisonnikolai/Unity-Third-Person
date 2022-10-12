@@ -14,9 +14,9 @@ public class EnemyAttackingState : EnemyBaseState
     public override void Enter()
     {
         int attackIndex = Random.Range(0, 2);
-        var attack = stateMachine.Weapon.Attacks[attackIndex];
+        var attack = stateMachine.WeaponHandler.weapon.Attacks[attackIndex];
         FacePlayer();
-        stateMachine.Weapon.SetAttack(attack.Damage, attack.Knockback);
+        stateMachine.WeaponHandler.weapon.SetAttack(attack.Damage, attack.Knockback);
         stateMachine.Animator.CrossFadeInFixedTime(attack.AnimationName, TransitionDuration);
     }
 

@@ -22,6 +22,8 @@ public class WeaponHandler : MonoBehaviour
         if (weaponPrefab == null) { return; }
         weaponAttached = Instantiate(weaponPrefab, backAttachment);
         weaponAttached.name = weaponName;
+        weapon = weaponAttached.GetComponent<Weapon>();
+        this.weapon.SetCollider(myCollider);
         weaponEquipped = true;
         //weaponAttached = weaponPrefab; // not needed?
     }

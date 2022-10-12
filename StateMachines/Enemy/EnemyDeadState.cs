@@ -12,7 +12,7 @@ public class EnemyDeadState : EnemyBaseState
     {
         stateMachine.Ragdoll.ToggleRagdoll(true);
         //stateMachine.Animator.CrossFadeInFixedTime("Armed-Death", 0.1f);  // TODO: set different death animations (sword, bow, staff)
-        stateMachine.Weapon.gameObject.SetActive(false);
+        stateMachine.WeaponHandler.weapon.gameObject.SetActive(false);
         GameObject.Destroy(stateMachine.Target);
     }
 

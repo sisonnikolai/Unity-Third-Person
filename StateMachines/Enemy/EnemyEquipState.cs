@@ -7,7 +7,6 @@ using UnityEngine;
 
 public class EnemyEquipState : EnemyBaseState
 {
-    private readonly int EquippedHash = Animator.StringToHash("Armed-Idle");
     private readonly int EquipHash = Animator.StringToHash("EquipFromBack");
     private const float CrossFadeDuration = 0.1f;
     private float timeBetweenActions = 0f;
@@ -25,12 +24,12 @@ public class EnemyEquipState : EnemyBaseState
     public override void Tick(float deltaTime)
     {
         // if next action is ready then attack
-        timeBetweenActions -= Time.deltaTime;
-        if (timeBetweenActions <= 0f) // TODO: enemy attacks even though player is not in range
-        {
-            //stateMachine.SwitchState(new EnemyChasingState(stateMachine, timeBetweenActions));
-            return;
-        }
+        //timeBetweenActions -= Time.deltaTime;
+        //if (timeBetweenActions <= 0f) // TODO: enemy attacks even though player is not in range
+        //{
+            stateMachine.SwitchState(new EnemyChasingState(stateMachine, timeBetweenActions));
+        //    return;
+        //}
     }
 
     public override void Exit()
