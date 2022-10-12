@@ -22,7 +22,8 @@ public class EnemyIdleState : EnemyBaseState
         Move(deltaTime);
         if (IsInRange())
         {
-            stateMachine.SwitchState(new EnemyChasingState(stateMachine));
+            //stateMachine.SwitchState(new EnemyChasingState(stateMachine));
+            stateMachine.SwitchState(new EnemyEquipState(stateMachine, 0));
             return;
         }
         stateMachine.Animator.SetFloat(SpeedHash, 0f, AnimatorDampTime, deltaTime);

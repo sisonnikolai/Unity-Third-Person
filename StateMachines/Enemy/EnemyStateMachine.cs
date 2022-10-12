@@ -54,7 +54,16 @@ public class EnemyStateMachine : StateMachine
         Gizmos.DrawWireSphere(transform.position, DetectionRange);
     }
 
+    #region Animation Events
+    private void HandleEquip()
+    {
+    }
+
+    private void HandleUnequip()
+    {
+    }
     private void FootL() { }
     private void FootR() { }
     private void Hit() { }
+#endregion
 }

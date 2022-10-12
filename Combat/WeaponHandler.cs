@@ -7,7 +7,7 @@ public class WeaponHandler : MonoBehaviour
     [SerializeField] private GameObject weaponPrefab;
     //[SerializeField] private WeaponDamage weaponDamage;
     [SerializeField] private Collider myCollider;
-    [SerializeField] public Weapon weapon;
+    [SerializeField] public Weapon weapon; // TODO: remove. Get weapon ccmponent from the weaponPrefab instead
     [SerializeField] private Transform leftHandTransform;
     [SerializeField] private Transform rightHandTransform;
     [SerializeField] private Transform backAttachment = null; // weapon placement in the back
@@ -19,10 +19,11 @@ public class WeaponHandler : MonoBehaviour
 
     private void Start()
     {
-        //if (weaponAttached == null) { return; }
-        //weaponAttached = Instantiate(weaponPrefab, backAttachment);
-        //weaponAttached.name = weaponName;
-        weaponAttached = weaponPrefab;
+        if (weaponPrefab == null) { return; }
+        weaponAttached = Instantiate(weaponPrefab, backAttachment);
+        weaponAttached.name = weaponName;
+        weaponEquipped = true;
+        //weaponAttached = weaponPrefab; // not needed?
     }
 
     // methods are being called in the animation (animation events)
