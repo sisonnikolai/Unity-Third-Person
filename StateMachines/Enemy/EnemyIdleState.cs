@@ -6,15 +6,25 @@ public class EnemyIdleState : EnemyBaseState
 {
     private readonly int SpeedHash = Animator.StringToHash("Speed");
     private readonly int MovementHash = Animator.StringToHash("Movement");
+    private readonly int UnequipHash = Animator.StringToHash("UnequipToBack");
     private const float CrossFadeDuration = 0.1f;
     private const float AnimatorDampTime = 0.1f;
-    public EnemyIdleState(EnemyStateMachine stateMachine) : base(stateMachine)
+    private bool shouldUnequip;
+    public EnemyIdleState(EnemyStateMachine stateMachine, bool shouldUnequip = false) : base(stateMachine)
     {
+        this.shouldUnequip = shouldUnequip;
     }
 
     public override void Enter()
     {
-        stateMachine.Animator.CrossFadeInFixedTime(MovementHash, CrossFadeDuration);
+        if (shouldUnequip)
+        {
+            stateMachine.Animator.CrossFadeInFixedTime(UnequipHash, CrossFadeDuration);
+        }
+        else
+        {
+            stateMachine.Animator.CrossFadeInFixedTime(MovementHash, CrossFadeDuration);
+        }
     }
 
     public override void Tick(float deltaTime)
@@ -23,7 +33,8 @@ public class EnemyIdleState : EnemyBaseState
         if (IsInRange())
         {
             //stateMachine.SwitchState(new EnemyChasingState(stateMachine));
-            stateMachine.SwitchState(new EnemyEquipState(stateMachine, 0));
+            stateMachine.WeaponHandler.SetWeaponEquip(true);
+            stateMachine.SwitchState(new EnemyEquipState(stateMachine));
             return;
         }
         stateMachine.Animator.SetFloat(SpeedHash, 0f, AnimatorDampTime, deltaTime);

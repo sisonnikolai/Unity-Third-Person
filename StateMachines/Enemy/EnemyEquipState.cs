@@ -11,9 +11,8 @@ public class EnemyEquipState : EnemyBaseState
     private const float CrossFadeDuration = 0.1f;
     private float timeBetweenActions = 0f;
 
-    public EnemyEquipState(EnemyStateMachine stateMachine, float timeBetweenActions) : base(stateMachine)
+    public EnemyEquipState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
-        this.timeBetweenActions = timeBetweenActions;
     }
 
     public override void Enter()
@@ -23,13 +22,7 @@ public class EnemyEquipState : EnemyBaseState
 
     public override void Tick(float deltaTime)
     {
-        // if next action is ready then attack
-        //timeBetweenActions -= Time.deltaTime;
-        //if (timeBetweenActions <= 0f) // TODO: enemy attacks even though player is not in range
-        //{
-            stateMachine.SwitchState(new EnemyChasingState(stateMachine, timeBetweenActions));
-        //    return;
-        //}
+        stateMachine.SwitchState(new EnemyChasingState(stateMachine, timeBetweenActions));
     }
 
     public override void Exit()

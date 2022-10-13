@@ -11,7 +11,10 @@ public class EnemyChasingState : EnemyBaseState
     private float timeBetweenActions = 0f;
     public EnemyChasingState(EnemyStateMachine stateMachine, float timeBetweenActions = 0f) : base(stateMachine)
     {
-        if (timeBetweenActions == 0f) { timeBetweenActions = Random.Range(1f, 1.5f); }
+        if (timeBetweenActions == 0f) 
+        { 
+            timeBetweenActions = Random.Range(1f, 1.5f); 
+        }
         this.timeBetweenActions = timeBetweenActions;
     }
 
@@ -25,7 +28,8 @@ public class EnemyChasingState : EnemyBaseState
         timeBetweenActions -= Time.deltaTime;
         if (!IsInRange())
         {
-            stateMachine.SwitchState(new EnemyIdleState(stateMachine));
+            stateMachine.WeaponHandler.SetWeaponEquip(false);
+            stateMachine.SwitchState(new EnemyIdleState(stateMachine, true));
             return;
         }
         else if (InAttackRange() && timeBetweenActions <= 0f)

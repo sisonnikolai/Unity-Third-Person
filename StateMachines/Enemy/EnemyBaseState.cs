@@ -56,4 +56,16 @@ public abstract class EnemyBaseState : State
         }
         stateMachine.Agent.velocity = stateMachine.CharacterController.velocity;
     }
+    
+    protected void ReturnToLocomotion()
+    {
+        if (stateMachine.WeaponHandler.IsWeaponEquipped())
+        {
+            stateMachine.SwitchState(new EnemyArmedIdleState(stateMachine, 0f));
+        }
+        else
+        {
+            stateMachine.SwitchState(new EnemyIdleState(stateMachine));
+        }
+    }
 }
