@@ -26,18 +26,23 @@ public class EnemyChasingState : EnemyBaseState
     public override void Tick(float deltaTime)
     {
         timeBetweenActions -= Time.deltaTime;
+
+        // if player is not in range, wait then unequip weapon
         if (!IsInRange())
         {
-            stateMachine.WeaponHandler.SetWeaponEquip(false);
-            stateMachine.SwitchState(new EnemyIdleState(stateMachine, true));
+            stateMachine.SwitchState(new EnemyArmedIdleState(stateMachine, 2f));
             return;
         }
+
+        // if in attack range and ready to attack
         else if (InAttackRange() && timeBetweenActions <= 0f)
         {
             timeBetweenActions = Random.Range(1.5f, 2.5f);
             stateMachine.SwitchState(new EnemyAttackingState(stateMachine));
             return;
         }
+
+        // if in attack range and not ready to attack
         else if (InAttackRange() && timeBetweenActions > 0f)
         {
             stateMachine.SwitchState(new EnemyArmedIdleState(stateMachine, timeBetweenActions));
