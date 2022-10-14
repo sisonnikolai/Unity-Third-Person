@@ -6,25 +6,15 @@ public class EnemyIdleState : EnemyBaseState
 {
     private readonly int SpeedHash = Animator.StringToHash("Speed");
     private readonly int MovementHash = Animator.StringToHash("Movement");
-    private readonly int UnequipHash = Animator.StringToHash("UnequipToBack");
     private const float CrossFadeDuration = 0.1f;
     private const float AnimatorDampTime = 0.1f;
-    private bool shouldUnequip;
-    public EnemyIdleState(EnemyStateMachine stateMachine, bool shouldUnequip = false) : base(stateMachine)
+    public EnemyIdleState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
-        this.shouldUnequip = shouldUnequip;
     }
 
     public override void Enter()
     {
-        if (shouldUnequip)
-        {
-            stateMachine.Animator.CrossFadeInFixedTime(UnequipHash, CrossFadeDuration);
-        }
-        else
-        {
-            stateMachine.Animator.CrossFadeInFixedTime(MovementHash, CrossFadeDuration);
-        }
+        stateMachine.Animator.CrossFadeInFixedTime(MovementHash, CrossFadeDuration);
     }
 
     public override void Tick(float deltaTime)
