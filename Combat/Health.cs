@@ -16,6 +16,7 @@ public class Health : MonoBehaviour
         health = maxHealth;
     }
 
+    public float GetValue => health;
     public bool IsDead => health == 0;
 
     public void DealDamange(int damage)
