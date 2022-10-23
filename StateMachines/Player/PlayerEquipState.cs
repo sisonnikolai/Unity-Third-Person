@@ -27,7 +27,7 @@ public class PlayerEquipState : PlayerBaseState
     {
         var attackStamina = stateMachine.WeaponHandler.weapon.Attacks[0].StaminaUsage;
 
-        if (stateMachine.InputReader.IsAttacking && stateMachine.Stamina.GetValue() >= attackStamina)
+        if (stateMachine.InputReader.IsAttacking && stateMachine.Stamina.GetValue >= attackStamina)
         {
             stateMachine.SwitchState(new PlayerAttackingState(stateMachine, 0));
             return;

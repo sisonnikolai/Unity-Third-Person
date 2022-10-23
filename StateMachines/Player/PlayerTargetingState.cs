@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class PlayerTargetingState : PlayerBaseState
 {
-    //private Vector2 dodgeInput;
-    //private float remainingDodgeDuration;
-
     private readonly int TargetingBlendTreeHash = Animator.StringToHash("TargetingBlendTree");
     private readonly int TargetSpeedXHash = Animator.StringToHash("TargetSpeedX");
     private readonly int TargetSpeedYHash = Animator.StringToHash("TargetSpeedY");
@@ -24,10 +21,9 @@ public class PlayerTargetingState : PlayerBaseState
 
     public override void Tick(float deltaTime)
     {
-        //var attackStamina = stateMachine.Attacks[0].StaminaUsage;
         var attackStamina = stateMachine.WeaponHandler.weapon.Attacks[0].StaminaUsage;
 
-        if (stateMachine.InputReader.IsAttacking && stateMachine.Stamina.GetValue() >= attackStamina)
+        if (stateMachine.InputReader.IsAttacking && stateMachine.Stamina.GetValue >= attackStamina)
         {
             stateMachine.SwitchState(new PlayerAttackingState(stateMachine, 0));
             return;

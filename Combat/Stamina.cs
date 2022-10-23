@@ -6,6 +6,7 @@ public class Stamina : MonoBehaviour
 {
     [SerializeField] private float maxStamina = 50f;
     private float stamina;
+    private float recoveryRate = 2.5f;
 
     void Start()
     {
@@ -16,15 +17,11 @@ public class Stamina : MonoBehaviour
     {
         if (stamina < maxStamina)
         {
-            stamina += (Time.deltaTime * 2.5f);
+            stamina += (Time.deltaTime * recoveryRate);
         }
-
     }
 
-    public float GetValue()
-    {
-        return stamina;
-    }
+    public float GetValue => stamina;
 
     public void Reduce(float usage)
     {

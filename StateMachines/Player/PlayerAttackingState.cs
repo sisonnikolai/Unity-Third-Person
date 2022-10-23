@@ -11,13 +11,11 @@ public class PlayerAttackingState : PlayerBaseState
 
     public PlayerAttackingState(PlayerStateMachine stateMachine, int attackIndex) : base(stateMachine) 
     {
-        //attackAnimation = stateMachine.Attacks[attackIndex];
         attackAnimation = stateMachine.WeaponHandler.weapon.Attacks[attackIndex];
     }
 
     public override void Enter()
     {
-        //stateMachine.WeaponDamage.SetAttack(attackAnimation.Damage, attackAnimation.Knockback);
         stateMachine.WeaponHandler.weapon.SetAttack(attackAnimation.Damage, attackAnimation.Knockback);
         stateMachine.Animator.CrossFadeInFixedTime(attackAnimation.AnimationName, attackAnimation.TransitionDuration);
         stateMachine.Stamina.Reduce(attackAnimation.StaminaUsage);
@@ -50,7 +48,6 @@ public class PlayerAttackingState : PlayerBaseState
             }
             else
             {
-                //stateMachine.SwitchState(new PlayerFreeLookState(stateMachine));
                 stateMachine.SwitchState(new PlayerEquipState(stateMachine));
             }
         }
@@ -67,7 +64,7 @@ public class PlayerAttackingState : PlayerBaseState
     {
         if (attackAnimation.ComboStateIndex == -1) { return; }
         if (normalizedTime < attackAnimation.ComboAttackTime) { return; }
-        if (stateMachine.Stamina.GetValue() < attackAnimation.StaminaUsage) { return; }
+        if (stateMachine.Stamina.GetValue < attackAnimation.StaminaUsage) { return; }
 
         stateMachine.SwitchState(new PlayerAttackingState(stateMachine, attackAnimation.ComboStateIndex));
     }

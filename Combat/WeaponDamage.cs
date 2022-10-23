@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// NOTE: NOT BEING USED.
 public class WeaponDamage : MonoBehaviour
 {
     [SerializeField] private Collider myCollider;

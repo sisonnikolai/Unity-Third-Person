@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    [field: SerializeField] public Attack[] Attacks { get; private set; } // TODO: move to Weapon class
+    [field: SerializeField] public Attack[] Attacks { get; private set; }
     [SerializeField] private GameObject weaponPrefab = null;
-    [SerializeField] private Collider myCollider; //TODO: remove. Already in WeaponHandler
+    private Collider myCollider; // removed SerializeField. Already in WeaponHandler
 
     private int attackDamage = 0;
     private float attackKnockback = 1f;
