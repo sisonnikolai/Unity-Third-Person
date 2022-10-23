@@ -7,7 +7,7 @@ public class PlayerFreeLookState : PlayerBaseState
     private readonly int EquipHash = Animator.StringToHash("EquipFromBack");
     private const float AnimatorDampTime = 0.1f;
     private const float CrossFadeDuration = 0.1f;
-    private bool shouldFade; // for the climbing animation
+    private readonly bool shouldFade; // for the climbing animation
     public PlayerFreeLookState(PlayerStateMachine stateMachine, bool shouldFade = true) : base(stateMachine) 
     {
         this.shouldFade = shouldFade;
@@ -17,6 +17,7 @@ public class PlayerFreeLookState : PlayerBaseState
     {
         stateMachine.InputReader.TargetEvent += OnTarget;
         stateMachine.InputReader.JumpEvent += OnJump;
+        stateMachine.InputReader.DodgeEvent += OnDodge;
         stateMachine.InputReader.EquipEvent += OnEquip;
 
         stateMachine.Animator.SetFloat(FreeLookSpeedHash, 0f);
@@ -32,14 +33,6 @@ public class PlayerFreeLookState : PlayerBaseState
 
     public override void Tick(float deltaTime)
     {
-        //var attackStamina = stateMachine.WeaponHandler.Weapon.Attacks[0].StaminaUsage;
-
-        //if (stateMachine.InputReader.IsAttacking && stateMachine.Stamina.GetValue() >= attackStamina)
-        //{
-        //    stateMachine.SwitchState(new PlayerAttackingState(stateMachine, 0));
-        //    return;
-        //}
-
         Vector3 movement = CalculateMovement();
 
         Move(movement * stateMachine.FreeLookMovementSpeed, deltaTime);
@@ -57,6 +50,7 @@ public class PlayerFreeLookState : PlayerBaseState
     {
         stateMachine.InputReader.TargetEvent -= OnTarget;
         stateMachine.InputReader.JumpEvent -= OnJump;
+        stateMachine.InputReader.DodgeEvent -= OnDodge;
         stateMachine.InputReader.EquipEvent -= OnEquip;
     }
 
@@ -77,9 +71,13 @@ public class PlayerFreeLookState : PlayerBaseState
     }
     private void OnEquip()
     {
-        //stateMachine.SwitchState(new PlayerEquipState(stateMachine));
         if (!stateMachine.WeaponHandler.HasWeapon()) { return; }
         stateMachine.WeaponHandler.SetWeaponEquip(true);
         stateMachine.Animator.CrossFadeInFixedTime(EquipHash, CrossFadeDuration);
+    }
+    private void OnDodge()
+    {
+        if (stateMachine.InputReader.MovementValue == Vector2.zero) { return; }
+        stateMachine.SwitchState(new PlayerDodgingState(stateMachine, stateMachine.InputReader.MovementValue, false));
     }
 }
