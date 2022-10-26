@@ -13,6 +13,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     public event Action DodgeEvent;
     public event Action TargetEvent;
     public event Action EquipEvent;
+    public event Action SwitchTargetEvent;
 
     private Controls controls;
 
@@ -85,5 +86,11 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     {
         if (!context.performed) { return; }
         EquipEvent?.Invoke();
+    }
+
+    public void OnSwitchTarget(InputAction.CallbackContext context)
+    {
+        if (!context.performed) { return; }
+        SwitchTargetEvent?.Invoke();
     }
 }

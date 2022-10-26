@@ -98,6 +98,15 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchTarget"",
+                    ""type"": ""Button"",
+                    ""id"": ""2e1e0997-56a8-4b5c-b9aa-3011c323aaa5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -309,6 +318,17 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""action"": ""Equip"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""53769d24-051c-46c6-a783-a3c52ab78b76"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""SwitchTarget"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -353,6 +373,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_Block = m_Player.FindAction("Block", throwIfNotFound: true);
         m_Player_Equip = m_Player.FindAction("Equip", throwIfNotFound: true);
+        m_Player_SwitchTarget = m_Player.FindAction("SwitchTarget", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -420,6 +441,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_Block;
     private readonly InputAction m_Player_Equip;
+    private readonly InputAction m_Player_SwitchTarget;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -432,6 +454,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputAction @Block => m_Wrapper.m_Player_Block;
         public InputAction @Equip => m_Wrapper.m_Player_Equip;
+        public InputAction @SwitchTarget => m_Wrapper.m_Player_SwitchTarget;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -465,6 +488,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Equip.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEquip;
                 @Equip.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEquip;
                 @Equip.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEquip;
+                @SwitchTarget.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchTarget;
+                @SwitchTarget.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchTarget;
+                @SwitchTarget.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchTarget;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -493,6 +519,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Equip.started += instance.OnEquip;
                 @Equip.performed += instance.OnEquip;
                 @Equip.canceled += instance.OnEquip;
+                @SwitchTarget.started += instance.OnSwitchTarget;
+                @SwitchTarget.performed += instance.OnSwitchTarget;
+                @SwitchTarget.canceled += instance.OnSwitchTarget;
             }
         }
     }
@@ -525,5 +554,6 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnAttack(InputAction.CallbackContext context);
         void OnBlock(InputAction.CallbackContext context);
         void OnEquip(InputAction.CallbackContext context);
+        void OnSwitchTarget(InputAction.CallbackContext context);
     }
 }

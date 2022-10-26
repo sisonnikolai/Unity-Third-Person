@@ -16,6 +16,7 @@ public class PlayerTargetingState : PlayerBaseState
         stateMachine.InputReader.TargetEvent += OnTarget;
         stateMachine.InputReader.DodgeEvent += OnDodge;
         stateMachine.InputReader.JumpEvent += OnJump;
+        stateMachine.InputReader.SwitchTargetEvent += OnSwitchTarget;
         stateMachine.Animator.CrossFadeInFixedTime(TargetingBlendTreeHash, CrossFadeDuration);
     }
 
@@ -49,6 +50,7 @@ public class PlayerTargetingState : PlayerBaseState
         stateMachine.InputReader.TargetEvent -= OnTarget;
         stateMachine.InputReader.DodgeEvent -= OnDodge;
         stateMachine.InputReader.JumpEvent -= OnJump;
+        stateMachine.InputReader.SwitchTargetEvent -= OnSwitchTarget;
     }
 
     private void OnTarget()
@@ -72,6 +74,11 @@ public class PlayerTargetingState : PlayerBaseState
     private void OnJump()
     {
         stateMachine.SwitchState(new PlayerJumpingState(stateMachine));
+    }
+
+    private void OnSwitchTarget()
+    {
+        stateMachine.Targeter.SwitchTarget();
     }
 
     private Vector3 CalculateMovement(float deltaTime)

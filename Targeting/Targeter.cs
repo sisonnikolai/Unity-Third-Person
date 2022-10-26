@@ -70,6 +70,33 @@ public class Targeter : MonoBehaviour
         CurrentTarget = null;
     }
 
+    public void SwitchTarget()
+    {
+        if (CurrentTarget == null) { return; }
+        if (targets.Count <= 1) { return; }
+
+        Target previousTarget = CurrentTarget;
+        Target nextTarget = null;
+        float closestTargetDistance = Mathf.Infinity;
+        Vector2 centerScreen = new Vector2(0.5f, 0.5f);
+
+        foreach (Target target in targets)
+        {
+            if (target == previousTarget) { continue; }
+            Vector2 viewPos = mainCamera.WorldToViewportPoint(target.transform.position);
+
+            Vector2 toCenter = viewPos - centerScreen;
+            if (toCenter.sqrMagnitude < closestTargetDistance)
+            {
+                nextTarget = target;
+                closestTargetDistance = toCenter.sqrMagnitude;
+            }
+        }
+        CurrentTarget = nextTarget;
+        CinemachineTargetGroup.RemoveMember(previousTarget.transform);
+        CinemachineTargetGroup.AddMember(CurrentTarget.transform, 1f, 2f);
+    }
+
     private void RemoveTarget(Target target)
     {
         if (CurrentTarget == target)
